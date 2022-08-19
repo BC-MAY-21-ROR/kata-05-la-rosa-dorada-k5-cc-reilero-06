@@ -26,21 +26,24 @@ describe GildedRose do
       expect(items[2].quality).to eq 23
       expect(items[3].quality).to eq 0
     end
-    # it "does not change the name" do
-    #   items = [Item.new("foo", 0, 0)]
-    #   GildedRose.new(items).update_quality()
-    #   expect(items[0].name).to eq "fixme"
-    # end
-    # it "does not change the name" do
-    #   items = [Item.new("foo", 0, 0)]
-    #   GildedRose.new(items).update_quality()
-    #   expect(items[0].name).to eq "fixme"
-    # end
-    # it "does not change the name" do
-    #   items = [Item.new("foo", 0, 0)]
-    #   GildedRose.new(items).update_quality()
-    #   expect(items[0].name).to eq "fixme"
-    # end
+
+    it "Aged Brie actually increases in Quality the older it gets" do
+      items = [
+        Item.new(name="Aged Brie", sell_in=2, quality=0),
+        Item.new(name="Aged Brie", sell_in=0, quality=0)
+      ]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 1
+      expect(items[1].quality).to eq 2
+    end
+
+    it "The Quality of an item is never more than 50" do
+      items = [Item.new(name="Aged Brie", sell_in=2, quality=50)]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 50
+    end
+    
+    
   end
 
 end
