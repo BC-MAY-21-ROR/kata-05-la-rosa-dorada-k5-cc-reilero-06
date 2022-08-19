@@ -42,7 +42,27 @@ describe GildedRose do
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq 50
     end
-    
+
+    it "Once the sell by date has passed, Quality degrades twice as fast" do
+      items = [Item.new(name="foo", sell_in=0, quality=10)]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 8
+    end
+
+    it "The Quality of an item is never negative" do
+      items = [Item.new(name="foo", sell_in=0, quality=0)]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 0
+    end
+
+    it '"Conjured" items degrade in Quality twice as fast as normal items' do
+      items = [Item.new(name="Conjured Mana Cake", sell_in=3, quality=6)]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 4
+      items[0].sell_in=0
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq 0
+    end
     
   end
 
