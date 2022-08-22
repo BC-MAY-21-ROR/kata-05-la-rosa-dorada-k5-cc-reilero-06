@@ -18,12 +18,14 @@ class GildedRose
     end
   end
 
+
   def reduce_quality(days) #method that reduces the quality of the items
     days <= 0 ? 2 : 1
   end
 
   def check_quality(quality) #method that check that the quality is more than 1 
     quality.between?(0,49)
+
   end
 
   def compare_sell_in(days, quality) #method that belongs to items Backstage
