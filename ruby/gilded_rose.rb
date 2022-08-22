@@ -1,32 +1,52 @@
 class GildedRose
 
-  def initialize(items)
+  def initialize(items) #we define the initialize and it recives the items
     @items = items
   end
 
-  def normal_item(item)
+  def normal_item(item) #method that applies the rules to normal items
     item.sell_in -= 1 
     if check_quality(item.quality)
       item.quality -= reduce_quality(item.sell_in)
     end
   end
-  def conjured_item(item)
+
+  def conjured_item(item) #method that appplies the rules to conjured items
     item.sell_in -= 1 #if item.sell_in > 0
     if check_quality(item.quality)
       item.quality -= reduce_quality(item.sell_in)*2
     end
   end
-  def reduce_quality(days)
+
+  def reduce_quality(days) #method that reduces the quality of the items
     days <= 0 ? 2 : 1
   end
 
-  def check_quality(quality)
-    quality > 0
+  def check_quality(quality) #method that check that the quality is more than 1 
+    quality.between?(0,49)
   end
 
-  def compare_sell_in(days)
-    return 1 if days.between?(6, 10)
-    return 2 if days < 6
+  def compare_sell_in(days, quality) #method that belongs to items Backstage
+    return 0 if days <=0
+    return quality + 2 if days.between?(6, 10)
+    return quality + 3 if days < 6
+    return quality + 1
+  end
+
+  def aged_item(item) #method that belongs to items Aged Brie
+    item.sell_in -= 1
+    if check_quality(item.quality)
+      item.quality += reduce_quality(item.sell_in)
+    end
+  end 
+
+
+
+  def backstage_item(item) #method that belongs to items Backstage
+    item.sell_in -= 1
+    if check_quality(item.quality)
+      item.quality = compare_sell_in(item.sell_in, item.quality)
+    end
   end
 
   def update_quality()
@@ -34,9 +54,9 @@ class GildedRose
     @items.each do |item|
       case item.name
       when /Aged/
-        #aged_item(item)
+        aged_item(item)
       when /Backstage/
-        #backstage_item(item)
+        backstage_item(item)
       when /Sulfuras/
       when /Conjured/
         conjured_item(item)
