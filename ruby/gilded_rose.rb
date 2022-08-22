@@ -40,8 +40,6 @@ class GildedRose
     end
   end 
 
-
-
   def backstage_item(item) #method that belongs to items Backstage
     item.sell_in -= 1
     if check_quality(item.quality)
