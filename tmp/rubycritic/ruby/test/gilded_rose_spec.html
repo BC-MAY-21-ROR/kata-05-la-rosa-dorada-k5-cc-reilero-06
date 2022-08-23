@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Updated <time class='js-timeago' datetime='2022-08-23 16:15:08 -0500'>2022-08-23 16:15:08 -0500</time>
+          Updated <time class='js-timeago' datetime='2022-08-23 19:07:24 -0300'>2022-08-23 19:07:24 -0300</time>
         
       </span>
     </div>
@@ -68,15 +68,15 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">67</span><small> lines of codes</small></div>
+              <div><span class="metric">63</span><small> lines of codes</small></div>
               <div><span class="metric">0</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">N/A</span><small> complexity/method</small></div>
-              <div><span class="metric">4</span><small> churn</small></div>
+              <div><span class="metric">6</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">194.5</span><small> complexity</small></div>
+              <div><span class="metric">137.68</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -88,8 +88,8 @@
             <li><a href="#" id="toggle-code" class="toggle-button button">code</a></li>
             <li class="active">
               <a href="#" id="toggle-smells" class="toggle-button button">
-                3
-                smells
+                1
+                smell
               </a>
             </li>
           </ul>
@@ -101,10 +101,8 @@
 
 describe GildedRose do
 
-  describe &quot;#update_quality&quot; do
-
-    before(:all) do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(#update_quality)::before#all has a flog score of 34</span>          </div>  </li></ol>
-      things = [
+  describe &quot;#update_quality&quot; do<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe##update_quality has a flog score of 31</span>          </div>  </li></ol>
+  things = [
         Item.new(name=&quot;Aged Brie&quot;, sell_in=2, quality=0),
         Item.new(name=&quot;Backstage passes to a TAFKAL80ETC concert&quot;, sell_in=1, quality=50),
         Item.new(name=&quot;White Wine&quot;, sell_in=0, quality=10),
@@ -112,29 +110,27 @@ describe GildedRose do
         Item.new(name=&quot;Conjured Mana Cake&quot;, sell_in=3, quality=6),
         Item.new(name=&quot;Conjured Mana Cake&quot;, sell_in=0, quality=6)
       ]
+    before(:all) do
       GildedRose.new(things).update_quality
     end
 
-    it &#39;&quot;Sulfuras&quot;, being a legendary item, never has to be sold or decreases in Quality&#39; do# HighComplexity<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(#update_quality)::it#"Sulfuras", being a legendary item, never has to be sold or decreases in Quality has a flog score of 33</span>          </div>  </li></ol>
+    it &#39;&quot;Sulfuras&quot;, being a legendary item, never has to be sold or decreases in Quality&#39; do
+      expect_value = [10,80]
       items = [Item.new(name=&quot;Sulfuras, Hand of Ragnaros&quot;, sell_in=10, quality=80)]
       GildedRose.new(items).update_quality()
-      expect(items[0].name).to eq &quot;Sulfuras, Hand of Ragnaros&quot;
-      expect(items[0].sell_in).to eq 10
-      expect(items[0].quality).to eq 80
+      return_value = [items[0].sell_in, items[0].quality]
+      expect(return_value).to eq expect_value
     end
  
-    it &#39;&quot;Backstage passes&quot;, increment quality on sellin left but decrese to 0 when sell_in is 0 &#39; do # HighComplexity<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flog/" target="_blank"><b>HighComplexity</b></a>        </span>      </div>      <span>describe(#update_quality)::it#"Backstage passes", increment quality on sellin left but decrese to 0 when sell_in is 0  has a flog score of 53</span>          </div>  </li></ol>
-      items = [
-        Item.new(name=&quot;Backstage passes to a TAFKAL80ETC concert&quot;, sell_in=15, quality=20),
-        Item.new(name=&quot;Backstage passes to a TAFKAL80ETC concert&quot;, sell_in=10, quality=20),
-        Item.new(name=&quot;Backstage passes to a TAFKAL80ETC concert&quot;, sell_in=5, quality=20),
-        Item.new(name=&quot;Backstage passes to a TAFKAL80ETC concert&quot;, sell_in=0, quality=20)
-      ]
-      GildedRose.new(items).update_quality()
-      expect(items[0].quality).to eq 21
-      expect(items[1].quality).to eq 22
-      expect(items[2].quality).to eq 23
-      expect(items[3].quality).to eq 0
+    it &#39;&quot;Backstage passes&quot;, increment quality on sellin left but decrese to 0 when sell_in is 0 &#39; do
+      items = [Item.new(name=&quot;Backstage passes to a TAFKAL80ETC concert&quot;, sell_in=15, quality=20)]
+      days=[15,10,5,0]
+      quality_return=days.map do |day|
+        items[0].sell_in=day
+        GildedRose.new(items).update_quality()
+        items[0].quality
+      end
+      expect(quality_return).to eq [21,23,26,0]
     end
 
     it &quot;Aged Brie&#39;s quality always increases&quot; do

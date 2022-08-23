@@ -15,7 +15,7 @@ describe GildedRose do
       GildedRose.new(things).update_quality
     end
 
-    it '"Sulfuras", being a legendary item, never has to be sold or decreases in Quality' do# HighComplexity
+    it '"Sulfuras", being a legendary item, never has to be sold or decreases in Quality' do
       expect_value = [10,80]
       items = [Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=10, quality=80)]
       GildedRose.new(items).update_quality()
@@ -23,7 +23,7 @@ describe GildedRose do
       expect(return_value).to eq expect_value
     end
  
-    it '"Backstage passes", increment quality on sellin left but decrese to 0 when sell_in is 0 ' do # HighComplexity
+    it '"Backstage passes", increment quality on sellin left but decrese to 0 when sell_in is 0 ' do
       items = [Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=20)]
       days=[15,10,5,0]
       quality_return=days.map do |day|
