@@ -53,18 +53,16 @@ class GildedRose
   end
 
   def update_quality()
-    special = ["Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros","Conjured Mana Cake"]
     @items.each do |item|
       case item.name
       when /Aged/
         aged_item(item)
       when /Backstage/
         backstage_item(item)
-      when /Sulfuras/
       when /Conjured/
         conjured_item(item)
       else
-        normal_item(item)
+        normal_item(item) unless /Sulfuras/
       end
     end
   end
